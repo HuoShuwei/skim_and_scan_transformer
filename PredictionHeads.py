@@ -1,6 +1,6 @@
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
 
 class End2EndPredictionHead(nn.Module):
     def __init__(self, dim):
@@ -8,21 +8,24 @@ class End2EndPredictionHead(nn.Module):
         self.mlp = nn.Sequential(
             nn.Linear(dim, 64),
             nn.ReLU(),
-            nn.Linear(64, 2),
+            nn.Linear(64, 2),  # Output two values
             nn.Sigmoid()
         )
-        
+    
     def forward(self, vq_out):
         """
         Forward pass for End2EndPredictionHead.
         
         Args:
-            vq_out (torch.Tensor): Enhanced vector query, shape [B, dim]
+            vq_out (torch.Tensor): Input tensor of shape [B, dim]
         
         Returns:
-            torch.Tensor: Predicted 2-dimensional vector, shape [B, 2]
+            torch.Tensor: Clamped output tensor of shape [B, 2] 
         """
-        return self.mlp(vq_out)
+        z = self.mlp(vq_out)  # Pass through MLP, shape [B, 2]
+        # Compute a and b based on z[:, 0] and z[:, 1]
+        output = torch.stack([z[:, 0] - z[:, 1] / 2, z[:, 0] + z[:, 1] / 2], dim=1)
+        return torch.clamp(output, 0.0, 1.0)  # Ensure values are within [0, 1]
 
 class FramewisePredictionHead(nn.Module):
     def __init__(self, dim):
