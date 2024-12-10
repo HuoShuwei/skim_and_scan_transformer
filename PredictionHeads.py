@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+# two pred-heads
+
 class End2EndPredictionHead(nn.Module):
     def __init__(self, dim):
         super(End2EndPredictionHead, self).__init__()
