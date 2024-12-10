@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import math
 
 class PositionalEncoding(nn.Module):
-    def __init__(self, dim, max_len=5000):
+    def __init__(self, dim, max_len=1024):
         super(PositionalEncoding, self).__init__()
         # Create a long enough positional encodings
         pe = torch.zeros(max_len, dim)
