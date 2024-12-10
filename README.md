@@ -8,7 +8,7 @@ Official PyTorch implementation of "Skim-and-Scan Transformer: A New Transformer
 🚧  **Current Status** :
 
 * The network architecture implementation has been released
-* Training code and pre-trained models will be available soon
+* The pre-trained models will be available soon
 
 ## Overview
 
