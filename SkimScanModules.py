@@ -208,7 +208,6 @@ class SkimAndScanModule(nn.Module):
     def forward(self, vq, sq, sr):
         """
         Forward pass for SkimAndScanModule.
-        
         Args:
             vq (torch.Tensor): Vector query tensor, shape [B, dim]
             sq (torch.Tensor): Sequence query tensor, shape [B, Tq, dim]
