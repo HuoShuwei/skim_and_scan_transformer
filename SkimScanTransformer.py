@@ -10,7 +10,6 @@ import torch.nn as nn
 from SkimScanModules import SkimAndScanModule, AttentionBasedTransformUnit
 from PredictionHeads import End2EndPredictionHead, FramewisePredictionHead
 
-
 class SkimAndScanTransformer(nn.Module):
     def __init__(self, dim, num_heads, num_blocks, max_len=5000):
         super(SkimAndScanTransformer, self).__init__()
